@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> userManager
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        @if (await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name),"Admin") || await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "CanEditHomepage"))
+        {
+            @Html.ActionLink("Edit Homepage", "EditHomepage", "Admin", null, new { @class = "nav-link" })
+        }
+    </li>
+    <li class="nav-item">
+        @if (await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "Admin") || await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "CanEditEvents"))
+        {
+            @Html.ActionLink("Edit Events", "EditEvents", "Admin", null, new { @class = "nav-link" })
+        }
+    </li>
+    <li class="nav-item">
+        @if (await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "Admin") || await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "CanManageUsers"))
+        {
+            @Html.ActionLink("Manage Users", "ManageUsers", "Admin", null, new { @class = "nav-link" })
+        }
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink("Logout", "Logout", "Admin", null, new { @class = "btn btn-primary" })
+    </li>
+</ul>
