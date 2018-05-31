@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Edit Homepage";
+}
+
+@Html.Partial("_NavTabs")
+<br />
+@foreach(Section s in Model)
+{
+    <div class="card border-primary w-75 m-auto mb-3">
+        <div class="card-header font-weight-bold bg-primary text-light">@s.Title</div>
+        <div class="card-body">
+            <p class="card-text">@s.Text</p>
+            <a href="EditSection?id=@s.ID" class="btn btn-primary float-right font-weight-bold">Edit Section</a>
+        </div>
+    </div>
+    <br />
+}
+

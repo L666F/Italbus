@@ -1,0 +1,35 @@
+﻿@model List<ApplicationUser>
+@{
+    ViewData["Title"] = "Manage Users";
+}
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> userManager
+
+@Html.Partial("_NavTabs")
+
+@if (Model.Any())
+{
+<ul class="list-group m-auto">
+    @foreach (ApplicationUser user in Model)
+    {
+    <li class="list-group-item border-dark m-2">
+        <span class="m-3" style="font-size:large;font-weight:bold">@user.UserName</span>
+        <ul class="list-group m-3">
+            @{
+                var homepage = await userManager.IsInRoleAsync(user, "CanEditHomepage");
+                var events = await userManager.IsInRoleAsync(user, "CanEditEvents");
+                var users = await userManager.IsInRoleAsync(user, "CanManageUsers");
+            }
+            <li class="list-group-item">Can edit the homepage: <span>@(homepage ? "Yes" : "No")</span> <a class="btn btn-light border border-primary float-right text-primary" href="EditRole?id=@user.Id&role=homepage">Edit</a></li>
+            <li class="list-group-item">Can publish events: <span>@(events ? "Yes" : "No")</span> <a class="btn btn-light float-right border border-primary text-primary" href="EditRole?id=@user.Id&role=events">Edit</a></li>
+            <li class="list-group-item">Can manage users: <span>@(users ? "Yes" : "No")</span> <a class="btn btn-light float-right border border-primary text-primary" href="EditRole?id=@user.Id&role=users">Edit</a></li>
+        </ul>
+        <a href="DeleteUser?id=@user.Id" class="btn btn-danger m-2">Delete user</a>
+    </li>
+    }
+</ul>
+}
+else{
+    <h2 class="mt-5 text-center">There are no users.</h2>
+}
+

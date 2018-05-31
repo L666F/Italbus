@@ -1,0 +1,18 @@
+﻿@model Italbus.Models.Section
+@{
+    ViewData["Title"] = "Edit Section";
+}
+@using (Html.BeginForm("EditSection", "Admin"))
+{
+<div class="card border-primary w-75 m-auto mb-3">
+    @Html.TextBoxFor(m => m.Title, new {@class= "card-header bg-light text-dark form-control p-2 text-center" })
+    @Html.ValidationMessageFor(m => m.Title)
+    <div class="card-body">
+        <p class="card-text">@Html.TextAreaFor(m => m.Text, new { @class = "form-control" })</p>
+        <p>@Html.ValidationMessageFor(m => m.Text)</p>
+        @Html.HiddenFor(m => m.ID)
+        <a href="EditHomepage" class="btn btn-light text-danger float-left font-weight-bold">Go Back</a>
+        <button type="submit" class="btn btn-light text-primary float-right font-weight-bold border border-primary">Save Changes</button>
+    </div>
+</div>
+}

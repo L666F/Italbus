@@ -1,25 +1,23 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @inject UserManager<ApplicationUser> userManager
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs fixed-top bg-light">
     <li class="nav-item">
         @if (await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name),"Admin") || await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "CanEditHomepage"))
         {
-            @Html.ActionLink("Edit Homepage", "EditHomepage", "Admin", null, new { @class = "nav-link" })
+            @Html.ActionLink("Edit Homepage", "EditHomepage", "Admin", null, new { @class = "nav-link " + ((string)ViewData["Title"] == "Edit Homepage" ? "active" : "") })
         }
     </li>
     <li class="nav-item">
         @if (await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "Admin") || await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "CanEditEvents"))
         {
-            @Html.ActionLink("Edit Events", "EditEvents", "Admin", null, new { @class = "nav-link" })
+            @Html.ActionLink("Edit Events", "EditEvents", "Admin", null, new { @class = "nav-link " + ((string)ViewData["Title"] == "Edit Events" ? "active" : "") })
         }
     </li>
     <li class="nav-item">
         @if (await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "Admin") || await userManager.IsInRoleAsync(await userManager.FindByNameAsync(User.Identity.Name), "CanManageUsers"))
         {
-            @Html.ActionLink("Manage Users", "ManageUsers", "Admin", null, new { @class = "nav-link" })
+            @Html.ActionLink("Manage Users", "ManageUsers", "Admin", null, new { @class = "nav-link " + ((string)ViewData["Title"] == "Manage Users" ? "active" : "") })
         }
     </li>
-    <li class="nav-item">
-        @Html.ActionLink("Logout", "Logout", "Admin", null, new { @class = "btn btn-primary" })
-    </li>
+        @Html.ActionLink("Logout", "Logout", "Admin", null, new { @class = "btn btn-primary ml-3" })
 </ul>

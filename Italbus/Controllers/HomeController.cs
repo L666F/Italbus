@@ -25,7 +25,7 @@ namespace Italbus.Controllers
         {
             return View();
         }
-        [Route("/login")]
+        [Route("/login",Name = "Login")]
         public IActionResult Login()
         {
             if (signInManager.IsSignedIn(User))
