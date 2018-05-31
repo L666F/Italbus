@@ -1,14 +1,12 @@
 ﻿@model Italbus.Models.ViewModels.LoginVM
+@using Microsoft.AspNetCore.Identity;
 @{
     ViewData["Title"] = "Login";
 }
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4">
-
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 m-auto">
+        <div class="m-auto col-8 rounded bg-light border-dark border" style="margin:3% 0;padding:2%">
             @using (Html.BeginForm("Login", "Home"))
             {
                 <div class="form-group">
@@ -18,18 +16,15 @@
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Password)
-                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Password)
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary float-right">Login</button>
             }
-                @if (Model.Message!=null)
+                @if (Model.Message!="")
                 {
-                    <h3 class="text-danger">@Model.Message</h3>
+                    <h4 class="text-danger m-3 text-center w-100">@Model.Message</h4>
                 }
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Italbus.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Section> Sections { get; set; }
         public DbSet<Event> Events { get; set; }

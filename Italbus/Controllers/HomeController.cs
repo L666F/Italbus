@@ -20,20 +20,20 @@ namespace Italbus.Controllers
             this.signInManager = signInManager;
             this.userManager = userManager;
         }
-
+        [Route("/")]
         public IActionResult Index()
         {
             return View();
         }
-
+        [Route("/login")]
         public IActionResult Login()
         {
             if (signInManager.IsSignedIn(User))
                 return RedirectToAction("Index", "Admin");
             else
-                return View();
+                return View(new LoginVM { Message = "" });
         }
-
+        [Route("/login")]
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM vm)
         {
@@ -56,7 +56,7 @@ namespace Italbus.Controllers
                 }
                 else
                 {
-                    vm.Message = "User not found.";
+                    vm.Message = "Wrong Username or Password";
                     return View(vm);
                 }
             }
@@ -65,7 +65,7 @@ namespace Italbus.Controllers
                 return View(vm);
             }
         }
-
+        [Route("/Home/Error")]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
